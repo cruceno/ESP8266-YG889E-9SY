@@ -305,7 +305,6 @@ void onWifiDisconnect(const WiFiEventStationModeDisconnected& event) {
   wifiReconnectTimer.once(2, connectToWifi);
 }
 
-
 void onMqttConnect(bool sessionPresent) {
   Serial.println("Connected to MQTT.");
   Serial.print("Session present: ");
@@ -556,7 +555,7 @@ void read_and_publish_sensors(){
         Serial.println(msg);
 
     mqttClient.publish(Ic2_t, 0, false, msg, MSG_BUFFER_SIZE);
-   // # Potencia ctiva
+   // # Potencia activa
    // 'Pa': 0x2E, #0x09
    // 'Pb': 0x2F, #0x0A
    // 'Pc': 0x30, #0x0B
@@ -735,13 +734,13 @@ void setup()
   
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
     //TODO: index page for control and info
-    request->send(200, "text/plain", "Hi! I am ESP8266.");
+    request->send(200, "text/plain", "Yo soy el medidor de tension.");
   });
   server.on("/factoryReset", HTTP_GET, [](AsyncWebServerRequest *request) {
     //TODO: index page for control and info
     wifiManager.resetSettings();
     ESP.restart();
-    
+
   });
 
   AsyncElegantOTA.begin(&server);    // Start ElegantOTA
